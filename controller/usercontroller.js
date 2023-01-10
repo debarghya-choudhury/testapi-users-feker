@@ -22,9 +22,9 @@ const createUser = async (req, res) => {
                 message: 'Request body is empty'
             })
         }
-        
+
         // check if a user with the same mobile number or email already exists
-        const { emp_mobile, emp_email } = req.body;
+        const { emp_mobile, emp_email } = req.body
         const user = await User.findOne({ $or: [{ emp_mobile }, { emp_email }] });
         if (user) {
           return res.status(400).json({
@@ -50,7 +50,6 @@ const createUser = async (req, res) => {
 
 // 2nd api controller
 const assignTicket = async (req, res) => {
-    console.log(req.body)
     try {
         // Checking if the request is empty
         if (Object.keys(req.body).length === 0) {
@@ -61,12 +60,13 @@ const assignTicket = async (req, res) => {
         }
 
         // Checking if the email exists in the users collection
+        const { emp_email } = req.body
         const user = await User.findOne({
-            emp_email: req.body.emp_email
+            emp_email: emp_email
         })
 
         if (!user) {
-            return res.status(204).json({
+            return res.status(400).json({
                 status: 'error',
                 data: 'No such user exists.'
             })
@@ -110,7 +110,7 @@ const showUserTickets = async (req, res) => {
         })
 
         if (!user) {
-            return res.status(204).json({
+            return res.status(400).json({
                 status: 'error',
                 data: 'No such user exists.'
             })
