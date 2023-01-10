@@ -10,6 +10,8 @@ const showHome = (req, res) => {
     res.status(200).send('users-api-feker home page')
 }
 
+// Controllers
+// 1st api controller
 const createUser = async (req, res) => {
     try {
         // Checking if the request is empty
@@ -34,6 +36,7 @@ const createUser = async (req, res) => {
     }
 }
 
+// 2nd api controller
 const assignTicket = async (req, res) => {
     console.log(req.body)
     try {
@@ -52,7 +55,8 @@ const assignTicket = async (req, res) => {
 
         if (!user) {
             return res.status(404).json({
-                error: 'No such user exists.'
+                status: 'error',
+                data: 'No such user exists.'
             })
         }
 
@@ -77,8 +81,48 @@ const assignTicket = async (req, res) => {
     }
 }
 
+// 3rd api controller
+const showUserTickets = async (req, res) => {
+    try {
+        // Checking if the request is empty
+        if (Object.keys(req.body).length === 0) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Request body is empty'
+            })
+        }
+
+        // Checking if the email exists in the users collection
+        const user = await User.findOne({
+            emp_email: req.body.emp_email
+        })
+
+        if (!user) {
+            return res.status(404).json({
+                status: 'error',
+                data: 'No such user exists.'
+            })
+        }
+
+        let tickets = await Ticket.find({
+            emp_email: req.body.emp_email
+        })
+        console.log(tickets)
+        res.status(201).json({
+            status: 'success',
+            data: tickets
+        })
+    } catch (err) {
+        res.status(500).json({
+            status: 'error',
+            data: 'Error fetching tickets. Please try again.'
+        })
+    }
+}
+
 module.exports = {
     showHome,
     createUser,
-    assignTicket
+    assignTicket,
+    showUserTickets
 }
