@@ -22,10 +22,20 @@ const createUser = async (req, res) => {
                 message: 'Request body is empty'
             })
         }
+        
+        // check if a user with the same mobile number or email already exists
+        const { emp_mobile, emp_email } = req.body;
+        const user = await User.findOne({ $or: [{ emp_mobile }, { emp_email }] });
+        if (user) {
+          return res.status(400).json({
+            status: 'error' ,
+            message: "User already registered."});
+        }
 
         // Creating new user
         const newUser = new User(req.body)
         await newUser.save()
+
         res.status(201).json({
             status: 'success',
             message: 'New user registered successfully.'
@@ -33,7 +43,7 @@ const createUser = async (req, res) => {
     } catch (error) {
         res.status(401).json({
             status: 'error',
-            message: 'User already registered.'
+            message: error
         })
     }
 }

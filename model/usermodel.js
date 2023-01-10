@@ -11,13 +11,13 @@ const userSchema = new mongoose.Schema({
     },
     emp_mobile: {
         type: String,
-        required: true,
-        unique: true
+        unique: true,
+        required: true
     },
     emp_email: {
         type: String,
-        required: true,
-        unique: true
+        unique: true,
+        required: true
     },
     emp_designation: {
         type: String,
