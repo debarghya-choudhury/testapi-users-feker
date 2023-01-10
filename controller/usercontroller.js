@@ -10,6 +10,7 @@ const showHome = (req, res) => {
     res.status(200).send('users-api-feker home page')
 }
 
+
 // Controllers
 // 1st api controller
 const createUser = async (req, res) => {
@@ -21,6 +22,7 @@ const createUser = async (req, res) => {
                 message: 'Request body is empty'
             })
         }
+
         // Creating new user
         const newUser = new User(req.body)
         await newUser.save()
@@ -54,7 +56,7 @@ const assignTicket = async (req, res) => {
         })
 
         if (!user) {
-            return res.status(404).json({
+            return res.status(204).json({
                 status: 'error',
                 data: 'No such user exists.'
             })
@@ -98,7 +100,7 @@ const showUserTickets = async (req, res) => {
         })
 
         if (!user) {
-            return res.status(404).json({
+            return res.status(204).json({
                 status: 'error',
                 data: 'No such user exists.'
             })
