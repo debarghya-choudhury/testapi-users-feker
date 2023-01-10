@@ -12,6 +12,7 @@ This is a simple ticket management API built using Node.js, Express, and Mongoos
 - For creating new user if a user already registered with either the same mobile number or email, an error message "User already registered" will be returned
 - For assigning a ticket to a user if no user exists with that email, an error message "No such user exists" will be returned
 - For fetching a list of tickets assigned to a user if no user exists with that email, an error message "No such user exists" will be returned
+- The api will also handle error for null requests
 
 ## Note
 
