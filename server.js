@@ -14,7 +14,7 @@ const userRouter = require('./routes/userRoutes')
 app.use('/api/v1/users', userRouter)
 
 
-// Global error handler
+// Basic global error handler for the test
 app.get('*', (req, res) => {
     res.sendStatus(404)
 })
