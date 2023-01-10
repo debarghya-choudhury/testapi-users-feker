@@ -19,4 +19,4 @@ This is a simple ticket management API built using Node.js, Express, and Mongoos
 - We can use some kind of authentication and authorization mechanism to secure the API.
 - We can include pagination or sorting for the results to make the api better in handling large data sets.
 
-And that's it! With these three endpoints, you should be able to create new users, assign tickets to users, and fetch the list of tickets assigned to a user in your application.
+And that's it! With these three endpoints, We should be able to create new users, assign tickets to users, and fetch the list of tickets assigned to a user in our application.
