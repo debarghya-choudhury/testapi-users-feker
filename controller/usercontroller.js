@@ -10,7 +10,6 @@ const showHome = (req, res) => {
     res.status(200).send('users-api-feker home page')
 }
 
-
 // Controllers
 // 1st api controller
 const createUser = async (req, res) => {
@@ -21,15 +20,6 @@ const createUser = async (req, res) => {
                 status: 'error',
                 message: 'Request body is empty'
             })
-        }
-
-        // check if a user with the same mobile number or email already exists
-        const { emp_mobile, emp_email } = req.body
-        const user = await User.findOne({ $or: [{ emp_mobile }, { emp_email }] });
-        if (user) {
-          return res.status(400).json({
-            status: 'error' ,
-            message: "User already registered."});
         }
 
         // Creating new user
@@ -43,7 +33,7 @@ const createUser = async (req, res) => {
     } catch (error) {
         res.status(401).json({
             status: 'error',
-            message: error
+            message: "User already registered."
         })
     }
 }
