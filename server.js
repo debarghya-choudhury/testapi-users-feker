@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.disable('x-powered-by');
 require('dotenv').config()
 require('./database')
 
@@ -8,6 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({
     extended: false
 }))
+app.use(express.csrf())
 
 // Routes
 const userRouter = require('./routes/userRoutes')
